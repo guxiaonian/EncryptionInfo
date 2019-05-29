@@ -19,6 +19,12 @@ import fairy.easy.encryptioninformation.symmetry.SymmetryType;
  */
 public class EncryptionHelper {
 
+    private static final String VERSION = "0.0.1";
+
+    public static String getVersion() {
+        return VERSION;
+    }
+
     /**
      * MD5 加密
      *
@@ -80,7 +86,7 @@ public class EncryptionHelper {
      * @return 加密结果
      */
     public static byte[] encryptAesParam(byte[] data, byte[] key) {
-        return SymmetryHelper.encryptSymmetry(SymmetryType.AES, CipherSymmetryType.AES_CBC_PKCS5_PADDING, data, key,SymmetryHelper.DEFAULT_IV);
+        return SymmetryHelper.encryptSymmetry(SymmetryType.AES, CipherSymmetryType.AES_CBC_PKCS5_PADDING, data, key, SymmetryHelper.DEFAULT_IV);
     }
 
     /**
@@ -102,7 +108,7 @@ public class EncryptionHelper {
      * @return 解密结果
      */
     public static byte[] decryptAesParam(byte[] data, byte[] key) {
-        return SymmetryHelper.decryptSymmetry(SymmetryType.AES, CipherSymmetryType.AES_CBC_PKCS5_PADDING, data, key,SymmetryHelper.DEFAULT_IV);
+        return SymmetryHelper.decryptSymmetry(SymmetryType.AES, CipherSymmetryType.AES_CBC_PKCS5_PADDING, data, key, SymmetryHelper.DEFAULT_IV);
     }
 
 
