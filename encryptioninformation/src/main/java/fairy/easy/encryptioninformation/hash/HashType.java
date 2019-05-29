@@ -1,4 +1,4 @@
-package fairy.easy.encryptioninformation.sha;
+package fairy.easy.encryptioninformation.hash;
 
 /**
  * @author gunaonian
@@ -12,7 +12,7 @@ package fairy.easy.encryptioninformation.sha;
  * SHA-512	1+
  */
 
-public enum ShaType {
+public enum HashType {
 
     /**
      * MD5
@@ -46,7 +46,7 @@ public enum ShaType {
 
     private String typeName;
 
-    ShaType(String typeName) {
+    HashType(String typeName) {
         this.typeName = typeName;
     }
 

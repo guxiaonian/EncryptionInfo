@@ -1,4 +1,4 @@
-package fairy.easy.encryptioninformation.sha;
+package fairy.easy.encryptioninformation.hash;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -13,9 +13,9 @@ import fairy.easy.encryptioninformation.utils.StringUtil;
  *
  * @author gunaonian
  */
-public class ShaHelper {
+public class HashHelper {
 
-    private static final String TAG = ShaHelper.class.getSimpleName();
+    private static final String TAG = HashHelper.class.getSimpleName();
 
     /**
      * Hash加密返回值
@@ -24,7 +24,7 @@ public class ShaHelper {
      * @param data     The data.
      * @return the hex string of Hash encryption
      */
-    public static String encryptHashToString(ShaType hashType, String data) {
+    public static String encryptHashToString(HashType hashType, String data) {
         if (TextUtils.isEmpty(data)) {
             return null;
         }
@@ -38,7 +38,7 @@ public class ShaHelper {
      * @param data     The data.
      * @return the hex string of Hash encryption
      */
-    public static String encryptHashToString(ShaType hashType, byte[] data) {
+    public static String encryptHashToString(HashType hashType, byte[] data) {
         return StringUtil.bytes2HexString(encryptHash(hashType, data));
     }
 
@@ -49,7 +49,7 @@ public class ShaHelper {
      * @param data     The data.
      * @return the hex string of Hash encryption
      */
-    public static byte[] encryptHash(ShaType hashType, byte[] data) {
+    public static byte[] encryptHash(HashType hashType, byte[] data) {
         return shaTemplate(hashType, data);
     }
 
@@ -60,7 +60,7 @@ public class ShaHelper {
      * @param data     byte加密数据
      * @return byte加密后的数据
      */
-    private static byte[] shaTemplate(ShaType hashType, byte[] data) {
+    private static byte[] shaTemplate(HashType hashType, byte[] data) {
         if (data == null || data.length <= 0) {
             return null;
         }

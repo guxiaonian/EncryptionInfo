@@ -5,10 +5,10 @@ import fairy.easy.encryptioninformation.asymmetry.AsymmetryHelper;
 import fairy.easy.encryptioninformation.asymmetry.AsymmetryType;
 import fairy.easy.encryptioninformation.cipher.CipherAsymmetryType;
 import fairy.easy.encryptioninformation.cipher.CipherSymmetryType;
+import fairy.easy.encryptioninformation.hash.HashHelper;
 import fairy.easy.encryptioninformation.hmac.HmacHelper;
 import fairy.easy.encryptioninformation.hmac.HmacType;
-import fairy.easy.encryptioninformation.sha.ShaHelper;
-import fairy.easy.encryptioninformation.sha.ShaType;
+import fairy.easy.encryptioninformation.hash.HashType;
 import fairy.easy.encryptioninformation.symmetry.SymmetryHelper;
 import fairy.easy.encryptioninformation.symmetry.SymmetryType;
 
@@ -32,7 +32,7 @@ public class EncryptionHelper {
      * @return 加密结果
      */
     public static String getMd5Param(String data) {
-        return ShaHelper.encryptHashToString(ShaType.MD5, data);
+        return HashHelper.encryptHashToString(HashType.MD5, data);
     }
 
     /**
@@ -42,7 +42,7 @@ public class EncryptionHelper {
      * @return 加密结果
      */
     public static String getSha256Param(String data) {
-        return ShaHelper.encryptHashToString(ShaType.SHA_256, data);
+        return HashHelper.encryptHashToString(HashType.SHA_256, data);
     }
 
     /**
