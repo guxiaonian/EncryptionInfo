@@ -19,7 +19,7 @@ import fairy.easy.encryptioninformation.symmetry.SymmetryType;
  */
 public class EncryptionHelper {
 
-    private static final String VERSION = "0.0.1";
+    private static final String VERSION = "0.0.2";
 
     public static String getVersion() {
         return VERSION;
