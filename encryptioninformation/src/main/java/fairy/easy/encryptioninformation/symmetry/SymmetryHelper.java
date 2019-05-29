@@ -23,10 +23,16 @@ import fairy.easy.encryptioninformation.utils.StringUtil;
 public class SymmetryHelper {
     private static final String TAG = SymmetryHelper.class.getSimpleName();
     private static final String DES = "DES";
-    private static final byte[] DEFAULT_IV = "0000000000000000".getBytes();
+    public static final byte[] DEFAULT_IV = "0000000000000000".getBytes();
 
     /**
      * 对称加密返回值
+     *
+     * @param hashType     加密类型
+     * @param symmetryType 填充方式
+     * @param data         加密数据 字符串
+     * @param key          密码 字符串
+     * @return 16进制字符串
      */
     public static String encryptSymmetryToStringDefault(SymmetryType hashType, CipherSymmetryType symmetryType, String data, String key) {
         if (TextUtils.isEmpty(data) || TextUtils.isEmpty(key)) {
@@ -37,6 +43,13 @@ public class SymmetryHelper {
 
     /**
      * 对称加密返回值
+     *
+     * @param hashType     加密类型
+     * @param symmetryType 填充方式
+     * @param data         加密数据 字符串
+     * @param key          密码 字符串
+     * @param key          iv 向量
+     * @return 16进制字符串
      */
     public static String encryptSymmetryToString(SymmetryType hashType, CipherSymmetryType symmetryType, String data, String key, byte[] iv) {
         if (TextUtils.isEmpty(data) || TextUtils.isEmpty(key)) {
@@ -47,6 +60,13 @@ public class SymmetryHelper {
 
     /**
      * 对称加密返回值
+     *
+     * @param hashType     加密类型
+     * @param symmetryType 填充方式
+     * @param data         加密数据 字节数组
+     * @param key          密码 字节数组
+     * @param key          iv 向量
+     * @return 16进制字符串
      */
     public static String encryptSymmetryToString(SymmetryType hashType, CipherSymmetryType symmetryType, byte[] data, byte[] key, byte[] iv) {
         return StringUtil.bytes2HexString(encryptSymmetry(hashType, symmetryType, data, key, iv));
@@ -54,6 +74,13 @@ public class SymmetryHelper {
 
     /**
      * 对称加密返回值
+     *
+     * @param hashType     加密类型
+     * @param symmetryType 填充方式
+     * @param data         加密数据 字节数组
+     * @param key          密码 字节数组
+     * @param key          iv 向量
+     * @return 字节数组
      */
     public static byte[] encryptSymmetry(SymmetryType hashType, CipherSymmetryType symmetryType, byte[] data, byte[] key, byte[] iv) {
         return symmetricTemplate(data, key, hashType.getTypeName(), symmetryType.getCipher(), iv, true);
@@ -61,6 +88,26 @@ public class SymmetryHelper {
 
     /**
      * 对称加密返回值
+     *
+     * @param hashType     加密类型
+     * @param symmetryType 填充方式
+     * @param data         加密数据 字节数组
+     * @param key          密码 字节数组
+     * @param key          iv 向量
+     * @return 字节数组
+     */
+    public static byte[] encryptSymmetry(SymmetryType hashType, CipherSymmetryType symmetryType,String data, String key, byte[] iv) {
+        return symmetricTemplate(data.getBytes(), key.getBytes(), hashType.getTypeName(), symmetryType.getCipher(), iv, true);
+    }
+
+    /**
+     * 对称解密返回值
+     *
+     * @param hashType     解密类型
+     * @param symmetryType 填充方式
+     * @param data         解密数据 字符串
+     * @param key          密码 字符串
+     * @return 16进制字符串
      */
     public static String decryptSymmetryToStringDefault(SymmetryType hashType, CipherSymmetryType symmetryType, String data, String key) {
         if (TextUtils.isEmpty(data) || TextUtils.isEmpty(key)) {
@@ -70,7 +117,14 @@ public class SymmetryHelper {
     }
 
     /**
-     * 对称加密返回值
+     * 对称解密返回值
+     *
+     * @param hashType     解密类型
+     * @param symmetryType 填充方式
+     * @param data         解密数据 字符串
+     * @param key          密码 字符串
+     * @param iv           向量
+     * @return 16进制字符串
      */
     public static String decryptSymmetryToString(SymmetryType hashType, CipherSymmetryType symmetryType, String data, String key, byte[] iv) {
         if (TextUtils.isEmpty(data) || TextUtils.isEmpty(key)) {
@@ -80,14 +134,32 @@ public class SymmetryHelper {
     }
 
     /**
-     * 对称加密返回值
+     * 对称解密返回值
+     *
+     * @param hashType     解密类型
+     * @param symmetryType 填充方式
+     * @param data         解密数据 字节数组
+     * @param key          密码 字节数组
+     * @param iv           向量
+     * @return 16进制字符串
      */
     public static String decryptSymmetryToString(SymmetryType hashType, CipherSymmetryType symmetryType, byte[] data, byte[] key, byte[] iv) {
-        return new String(decryptSymmetry(hashType, symmetryType, data, key, iv));
+        byte[] result = decryptSymmetry(hashType, symmetryType, data, key, iv);
+        if (result != null) {
+            return new String(result);
+        }
+        return null;
     }
 
     /**
-     * 对称加密返回值
+     * 对称解密返回值
+     *
+     * @param hashType     解密类型
+     * @param symmetryType 填充方式
+     * @param data         解密数据 字节数组
+     * @param key          密码 字节数组
+     * @param key          iv 向量
+     * @return 字节数组
      */
     public static byte[] decryptSymmetry(SymmetryType hashType, CipherSymmetryType symmetryType, byte[] data, byte[] key, byte[] iv) {
         return symmetricTemplate(data, key, hashType.getTypeName(), symmetryType.getCipher(), iv, false);
@@ -96,8 +168,13 @@ public class SymmetryHelper {
     /**
      * 具体的方法计算
      *
-     * @param data byte加密数据
-     * @return byte加密后的数据
+     * @param data           数据 字节数组
+     * @param key            密码 字节数组
+     * @param algorithm      解密类型
+     * @param transformation 填充方式
+     * @param iv             向量
+     * @param isEncrypt      是否是加密
+     * @return 字节数组
      */
     private static byte[] symmetricTemplate(final byte[] data,
                                             final byte[] key,

@@ -27,7 +27,7 @@ public enum ShaType {
     /**
      * SHA-224
      */
-    SHA_224_API_22("SHA-224"),
+    SHA_224("SHA-224"),
 
     /**
      * SHA-256

@@ -1,7 +1,7 @@
 package fairy.easy.encryptioninformation.asymmetry;
 
 import android.text.TextUtils;
-import android.util.Base64;
+import android.util.Log;
 
 import java.security.InvalidKeyException;
 import java.security.Key;
@@ -17,6 +17,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 import fairy.easy.encryptioninformation.cipher.CipherAsymmetryType;
+import fairy.easy.encryptioninformation.code.Base64Helper;
 import fairy.easy.encryptioninformation.utils.StringUtil;
 
 /**
@@ -30,48 +31,180 @@ public class AsymmetryHelper {
 
 
     /**
-     * 对称加密返回值
+     * 非对称加密
+     *
+     * @param hashType     加密类型
+     * @param symmetryType 填充方式
+     * @param data         加密数据 字符串
+     * @param key          加密密码 字符串
+     * @param isPublicKey  是否是公钥
+     * @return 16进制字符串
      */
-    public static String encryptAsymmetryToString(AsymmetryType hashType, CipherAsymmetryType symmetryType, String data, String key, boolean isPublicKey) {
+    public static String encryptAsymmetryToHexString(AsymmetryType hashType, CipherAsymmetryType symmetryType, String data, String key, boolean isPublicKey) {
         if (TextUtils.isEmpty(data) || TextUtils.isEmpty(key)) {
             return null;
         }
-        return encryptAsymmetryToString(hashType, symmetryType, data.getBytes(), Base64.decode(key.getBytes(), Base64.DEFAULT), isPublicKey);
+        return encryptAsymmetryToHexString(hashType, symmetryType, data.getBytes(), Base64Helper.decode(key), isPublicKey);
     }
 
     /**
-     * 对称加密返回值
+     * 非对称加密
+     *
+     * @param hashType     加密类型
+     * @param symmetryType 填充方式
+     * @param data         加密数据 字节数组
+     * @param key          加密密码 字节数组
+     * @param isPublicKey  是否是公钥
+     * @return 16进制字符串
      */
-    public static String encryptAsymmetryToString(AsymmetryType hashType, CipherAsymmetryType symmetryType, byte[] data, byte[] key, boolean isPublicKey) {
+    public static String encryptAsymmetryToHexString(AsymmetryType hashType, CipherAsymmetryType symmetryType, byte[] data, byte[] key, boolean isPublicKey) {
         return StringUtil.bytes2HexString(encryptAsymmetry(hashType, symmetryType, data, key, isPublicKey));
     }
 
     /**
-     * 对称加密返回值
+     * 非对称加密
+     *
+     * @param hashType     加密类型
+     * @param symmetryType 填充方式
+     * @param data         加密数据 字符串
+     * @param key          加密密码 字符串
+     * @param isPublicKey  是否是公钥
+     * @return base64数据
+     */
+    public static byte[] encryptAsymmetryToBase64(AsymmetryType hashType, CipherAsymmetryType symmetryType, String data, String key, boolean isPublicKey) {
+        if (TextUtils.isEmpty(data) || TextUtils.isEmpty(key)) {
+            return null;
+        }
+        return encryptAsymmetryToBase64(hashType, symmetryType, data.getBytes(), Base64Helper.decode(key), isPublicKey);
+    }
+
+    /**
+     * 非对称加密
+     *
+     * @param hashType     加密类型
+     * @param symmetryType 填充方式
+     * @param data         加密数据 字符串
+     * @param key          加密密码 字符串
+     * @param isPublicKey  是否是公钥
+     * @return base64数据
+     */
+    public static String encryptAsymmetryToBase64ToString(AsymmetryType hashType, CipherAsymmetryType symmetryType, String data, String key, boolean isPublicKey) {
+        if (TextUtils.isEmpty(data) || TextUtils.isEmpty(key)) {
+            return null;
+        }
+        byte[] result = encryptAsymmetryToBase64(hashType, symmetryType, data.getBytes(), Base64Helper.decode(key), isPublicKey);
+        if (result != null) {
+            return new String(result);
+        }
+        return null;
+    }
+
+    /**
+     * 非对称加密
+     *
+     * @param hashType     加密类型
+     * @param symmetryType 填充方式
+     * @param data         加密数据 字节数组
+     * @param key          加密密码 字节数组
+     * @param isPublicKey  是否是公钥
+     * @return base64数据
+     */
+    public static byte[] encryptAsymmetryToBase64(AsymmetryType hashType, CipherAsymmetryType symmetryType, byte[] data, byte[] key, boolean isPublicKey) {
+        return Base64Helper.encode(encryptAsymmetry(hashType, symmetryType, data, key, isPublicKey));
+    }
+
+
+    /**
+     * 非对称加密
+     *
+     * @param hashType     加密类型
+     * @param symmetryType 填充方式
+     * @param data         加密数据 字节数组
+     * @param key          加密密码 字节数组
+     * @param isPublicKey  是否是公钥
+     * @return 字节数组
      */
     public static byte[] encryptAsymmetry(AsymmetryType hashType, CipherAsymmetryType symmetryType, byte[] data, byte[] key, boolean isPublicKey) {
         return asymmetricTemplate(data, key, isPublicKey, symmetryType.getCipher(), true, hashType.getTypeName());
     }
 
     /**
-     * 对称加密返回值
+     * 非对称解密
+     *
+     * @param hashType     加密类型
+     * @param symmetryType 填充方式
+     * @param data         加密数据 字符串
+     * @param key          加密密码 字符串
+     * @param isPublicKey  是否是公钥
+     * @return 16进制字符串
      */
-    public static String decryptAsymmetryToString(AsymmetryType hashType, CipherAsymmetryType symmetryType, String data, String key, boolean isPublicKey) {
+    public static String decryptHexStringAsymmetryToString(AsymmetryType hashType, CipherAsymmetryType symmetryType, String data, String key, boolean isPublicKey) {
         if (TextUtils.isEmpty(data) || TextUtils.isEmpty(key)) {
             return null;
         }
-        return decryptAsymmetryToString(hashType, symmetryType, data.getBytes(), Base64.decode(key.getBytes(), Base64.DEFAULT), isPublicKey);
+        return new String(decryptHexStringAsymmetry(hashType, symmetryType, data, key, isPublicKey));
     }
 
     /**
-     * 对称加密返回值
+     * 非对称解密
+     *
+     * @param hashType     加密类型
+     * @param symmetryType 填充方式
+     * @param data         加密数据 字节数组
+     * @param key          加密密码 字节数组
+     * @param isPublicKey  是否是公钥
+     * @return 字节数组
      */
-    public static String decryptAsymmetryToString(AsymmetryType hashType, CipherAsymmetryType symmetryType, byte[] data, byte[] key, boolean isPublicKey) {
-        return new String(decryptAsymmetry(hashType, symmetryType, data, key, isPublicKey));
+    public static byte[] decryptHexStringAsymmetry(AsymmetryType hashType, CipherAsymmetryType symmetryType, String data, String key, boolean isPublicKey) {
+        return decryptAsymmetry(hashType, symmetryType, StringUtil.hexString2Bytes(data), Base64Helper.decode(key), isPublicKey);
     }
 
     /**
-     * 对称加密返回值
+     * 非对称解密
+     *
+     * @param hashType     加密类型
+     * @param symmetryType 填充方式
+     * @param data         加密数据 字符串
+     * @param key          加密密码 字符串
+     * @param isPublicKey  是否是公钥
+     * @return 字节数组
+     */
+    public static byte[] decryptBase64Asymmetry(AsymmetryType hashType, CipherAsymmetryType symmetryType, String data, String key, boolean isPublicKey) {
+        return decryptAsymmetry(hashType, symmetryType, Base64Helper.decode(data.getBytes()), Base64Helper.decode(key), isPublicKey);
+    }
+
+    /**
+     * 非对称解密
+     *
+     * @param hashType     加密类型
+     * @param symmetryType 填充方式
+     * @param data         加密数据 字符串
+     * @param key          加密密码 字符串
+     * @param isPublicKey  是否是公钥
+     * @return 字节数组
+     */
+    public static String decryptBase64AsymmetryToString(AsymmetryType hashType, CipherAsymmetryType symmetryType, String data, String key, boolean isPublicKey) {
+        if (TextUtils.isEmpty(data) || TextUtils.isEmpty(key)) {
+            return null;
+        }
+        byte[] result = decryptBase64Asymmetry(hashType, symmetryType, data, key, isPublicKey);
+        if (result != null) {
+            return new String(result);
+
+        }
+        return null;
+    }
+
+
+    /**
+     * 非对称加密
+     *
+     * @param hashType     加密类型
+     * @param symmetryType 填充方式
+     * @param data         加密数据 字节数组
+     * @param key          加密密码 字节数组
+     * @param isPublicKey  是否是公钥
+     * @return 字节数组
      */
     public static byte[] decryptAsymmetry(AsymmetryType hashType, CipherAsymmetryType symmetryType, byte[] data, byte[] key, boolean isPublicKey) {
         return asymmetricTemplate(data, key, isPublicKey, symmetryType.getCipher(), false, hashType.getTypeName());
@@ -81,12 +214,13 @@ public class AsymmetryHelper {
     /**
      * 非对称加密
      *
-     * @param data
-     * @param key
-     * @param isPublicKey
-     * @param transformation
-     * @param isEncrypt
-     * @return
+     * @param data           加密数据 字节数组
+     * @param key            加密密码 字节数组
+     * @param isPublicKey    是否是公钥
+     * @param transformation 填充方式
+     * @param isEncrypt      是否是加密
+     * @param hashType       加密类型
+     * @return 字节数组
      */
     private static byte[] asymmetricTemplate(byte[] data,
                                              byte[] key,
@@ -134,17 +268,17 @@ public class AsymmetryHelper {
                 return cipher.doFinal(data);
             }
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            Log.e(TAG, e.toString());
         } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
+            Log.e(TAG, e.toString());
         } catch (InvalidKeyException e) {
-            e.printStackTrace();
+            Log.e(TAG, e.toString());
         } catch (BadPaddingException e) {
-            e.printStackTrace();
+            Log.e(TAG, e.toString());
         } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
+            Log.e(TAG, e.toString());
         } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
+            Log.e(TAG, e.toString());
         }
         return null;
     }

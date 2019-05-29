@@ -32,7 +32,7 @@ public enum HmacType {
     /**
      * HmacSHA224
      */
-    HMAC_SHA224_API_22("HmacSHA224"),
+    HMAC_SHA224("HmacSHA224"),
 
     /**
      * HmacSHA256
@@ -63,22 +63,22 @@ public enum HmacType {
     /**
      * PBEwithHmacSHA224
      */
-    PBE_WITH_HMAC_SHA_224_API_26("PBEwithHmacSHA224"),
+    PBE_WITH_HMAC_SHA_224("PBEwithHmacSHA224"),
 
     /**
      * PBEwithHmacSHA256
      */
-    PBE_WITH_HMAC_SHA_256_API_26("PBEwithHmacSHA256"),
+    PBE_WITH_HMAC_SHA_256("PBEwithHmacSHA256"),
 
     /**
      * PBEwithHmacSHA384
      */
-    PBE_WITH_HMAC_SHA_384_API_26("PBEwithHmacSHA384"),
+    PBE_WITH_HMAC_SHA_384("PBEwithHmacSHA384"),
 
     /**
      * PBEwithHmacSHA512
      */
-    PBE_WITH_HMAC_SHA_512_API_26("PBEwithHmacSHA512");
+    PBE_WITH_HMAC_SHA_512("PBEwithHmacSHA512");
 
 
     private String typeName;
