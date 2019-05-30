@@ -30,7 +30,7 @@ Table of Contents
 ###### 代码示例
 
 ```java
-ShaHelper.encryptHashToString(shaType, data)
+HashHelper.encryptHashToString(shaType, data)
 ```
 
 ###### 参数设置
