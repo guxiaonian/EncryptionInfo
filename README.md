@@ -88,6 +88,31 @@ AsymmetryHelper.encryptAsymmetryToHexString(asymmetryType, cipherAsymmetryType, 
 ---|-----|---
 asymmetryType|enum|非对称加密算法枚举
 cipherAsymmetryType |enum|非对称加密算法的填充格式枚举
-data |String|对称加密算法的数据
-key |String|对称加密算法的密码
+data |String|非对称加密算法的数据
+key |String|非对称加密算法的密码
 true |boolean|是否是公钥
+
+### 加密方法展示
+
+```java
+ Log.i(TAG, "MD5结果为:" + EncryptionHelper.getMd5Param(ENCRYPT_VALUE));
+ Log.i(TAG, "SHA256结果为:" + EncryptionHelper.getSha256Param(ENCRYPT_VALUE));
+ Log.i(TAG, "HmacMD5结果为:" + EncryptionHelper.getHmacMd5Param(ENCRYPT_VALUE, ENCRYPT_KEY));
+ Log.i(TAG, "HmacSHA256结果为:" + EncryptionHelper.getHmacSha256Param(ENCRYPT_VALUE, ENCRYPT_KEY));
+ String aesResult = EncryptionHelper.encryptAesParam(ENCRYPT_VALUE, AES_ENCRYPT_KEY);
+ Log.i(TAG, "AES加密HexString结果为:" + aesResult);
+ Log.i(TAG, "AES解密HexString结果为:" + EncryptionHelper.decryptAesParam(aesResult, AES_ENCRYPT_KEY));
+ String rsaResult = EncryptionHelper.encryptRsaParamWithPublicKeyToHexString(ENCRYPT_VALUE, RSA_PUBLIC_KEY);
+ Log.i(TAG, "RSA加密HexString结果为:" + rsaResult);
+ Log.i(TAG, "RSA解密HexString结果为:" + EncryptionHelper.decryptHexStringRsaParamWithPrivateKey(rsaResult, RSA_PRIVATE_KEY));
+ String rsa2Result = EncryptionHelper.encryptRsaParamWithPublicKey2ToBase64ToString(ENCRYPT_VALUE, RSA_PUBLIC_KEY);
+ Log.i(TAG, "RSA加密Base64结果为:" + rsa2Result);
+ Log.i(TAG, "RSA解密Base64结果为:" + EncryptionHelper.decryptBase64RsaParamWithPrivateKey2(rsa2Result, RSA_PRIVATE_KEY));
+ byte[] aesBytes=EncryptionHelper.encryptAesParam(ENCRYPT_VALUE.getBytes(),AES_ENCRYPT_KEY.getBytes());
+ byte[] result=EncryptionHelper.decryptAesParam(aesBytes,AES_ENCRYPT_KEY.getBytes());
+ Log.i(TAG,"AES Bytes解密结果为:"+new String(result));
+ byte[] rsaBytes=EncryptionHelper.encryptRsaParamBytes(ENCRYPT_VALUE.getBytes(), Base64Helper.decode(RSA_PUBLIC_KEY.getBytes()));
+ byte[] rsaBytesResult=EncryptionHelper.decryptRsaParamBytes(rsaBytes,Base64Helper.decode(RSA_PRIVATE_KEY.getBytes()));
+ Log.i(TAG,"RSA Bytes解密结果为:"+new String(rsaBytesResult));
+
+```

@@ -68,7 +68,7 @@ public class EncryptionHelper {
     }
 
     /**
-     * AES 加密
+     * AES 加密 默认向量加密
      *
      * @param data 加密数据
      * @param key  密码
@@ -79,7 +79,7 @@ public class EncryptionHelper {
     }
 
     /**
-     * AES 加密
+     * AES 加密 字节数组获取，未进行加工
      *
      * @param data 加密数据
      * @param key  密码
@@ -90,9 +90,9 @@ public class EncryptionHelper {
     }
 
     /**
-     * AES 解密
+     * AES 解密 默认向量解密
      *
-     * @param data 加密数据
+     * @param data 解密数据
      * @param key  密码
      * @return 解密结果
      */
@@ -101,9 +101,9 @@ public class EncryptionHelper {
     }
 
     /**
-     * AES 解密
+     * AES 解密 字节数组获取，未进行加工
      *
-     * @param data 加密数据
+     * @param data 解密数据
      * @param key  密码
      * @return 解密结果
      */
@@ -113,7 +113,7 @@ public class EncryptionHelper {
 
 
     /**
-     * RSA 加密
+     * RSA 加密 字节数组获取，未进行加工
      *
      * @param data 加密数据
      * @param key  密码
@@ -125,7 +125,7 @@ public class EncryptionHelper {
 
 
     /**
-     * RSA 解密
+     * RSA 解密 字节数组获取，未进行加工
      *
      * @param data 解密数据
      * @param key  密码
@@ -136,7 +136,7 @@ public class EncryptionHelper {
     }
 
     /**
-     * RSA 加密
+     * RSA 加密 加密数据并进行hexString
      *
      * @param data 加密数据
      * @param key  密码
@@ -147,9 +147,9 @@ public class EncryptionHelper {
     }
 
     /**
-     * RSA 解密
+     * RSA 解密 解密hexString的数据
      *
-     * @param data 加密数据
+     * @param data 解密数据
      * @param key  密码
      * @return 解密结果
      */
@@ -158,7 +158,7 @@ public class EncryptionHelper {
     }
 
     /**
-     * RSA 加密
+     * RSA 加密 加密数据并进行Base64
      *
      * @param data 加密数据
      * @param key  密码
@@ -169,9 +169,9 @@ public class EncryptionHelper {
     }
 
     /**
-     * RSA 解密
+     * RSA 解密 解密Base64的数据
      *
-     * @param data 加密数据
+     * @param data 解密数据
      * @param key  密码
      * @return 解密结果
      */
