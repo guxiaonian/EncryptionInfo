@@ -4,6 +4,7 @@
 
 **`Android`加密库**
 
+[![Download](https://api.bintray.com/packages/guxiaonian/maven/encryption/images/download.svg) ](https://bintray.com/guxiaonian/maven/encryption/_latestVersion)
 [![GitHub issues](https://img.shields.io/github/issues/guxiaonian/EncryptionInfo.svg)](https://github.com/guxiaonian/EncryptionInfo/issues)
 [![GitHub forks](https://img.shields.io/github/forks/guxiaonian/EncryptionInfo.svg)](https://github.com/guxiaonian/EncryptionInfo/network)
 [![GitHub stars](https://img.shields.io/github/stars/guxiaonian/EncryptionInfo.svg)](https://github.com/guxiaonian/EncryptionInfo/stargazers)
@@ -21,6 +22,13 @@ Table of Contents
       * [Hmac算法实现](#Hmac算法实现)
       * [对称加密算法实现](#对称加密算法实现)
       * [非对称加密算法实现](#非对称加密算法实现)
+
+
+# 依赖
+
+```gradle
+implementation 'fairy.easy:encryptioninformation:{latest_version}'
+```
 
 
 # 使用说明
