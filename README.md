@@ -9,7 +9,6 @@
 [![GitHub forks](https://img.shields.io/github/forks/guxiaonian/EncryptionInfo.svg)](https://github.com/guxiaonian/EncryptionInfo/network)
 [![GitHub stars](https://img.shields.io/github/stars/guxiaonian/EncryptionInfo.svg)](https://github.com/guxiaonian/EncryptionInfo/stargazers)
 [![GitHub license](https://img.shields.io/github/license/guxiaonian/EncryptionInfo.svg)](http://www.apache.org/licenses/LICENSE-2.0)
-[![Travis CI](https://travis-ci.org/guxiaonian/EncryptionInfo.svg?branch=master)](https://travis-ci.org/guxiaonian/EncryptionInfo)
 
 </div>
 <br>
