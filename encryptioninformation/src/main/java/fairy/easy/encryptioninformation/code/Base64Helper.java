@@ -42,6 +42,9 @@ public class Base64Helper {
      * @return 字节数组
      */
     public static byte[] decode(String key) {
+        if (TextUtils.isEmpty(key)) {
+            return null;
+        }
         return decode(key.getBytes());
     }
 
@@ -52,6 +55,9 @@ public class Base64Helper {
      * @return 字节数组
      */
     public static byte[] decode(byte[] key) {
+        if (key==null) {
+            return null;
+        }
         return Base64.decode(key, Base64.DEFAULT);
     }
 
@@ -89,6 +95,9 @@ public class Base64Helper {
      * @return 字节数组
      */
     public static byte[] encode(String key) {
+        if (TextUtils.isEmpty(key)) {
+            return null;
+        }
         return encode(key.getBytes());
     }
 
@@ -99,6 +108,9 @@ public class Base64Helper {
      * @return 字节数组
      */
     public static byte[] encode(byte[] key) {
+        if (key==null) {
+            return null;
+        }
         return Base64.encode(key, Base64.DEFAULT);
     }
 }
