@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import java.security.interfaces.RSAPublicKey;
-
 import fairy.easy.encryptioninformation.EncryptionHelper;
 import fairy.easy.encryptioninformation.code.Base64Helper;
 
@@ -23,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.tv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String pbeResult = EncryptionHelper.encryptPBE2HexString(ENCRYPT_VALUE, PBE_PASSWORD, PBE_SALT, PBE_SIZE);
+                Log.i(TAG, "PBE加密结果为:" + pbeResult);
+                Log.i(TAG, "PBE解密结果为:" + EncryptionHelper.decryptHexStringPBE2String(pbeResult, PBE_PASSWORD, PBE_SALT, PBE_SIZE));
                 Log.i(TAG, "MD5结果为:" + EncryptionHelper.getMd5Param(ENCRYPT_VALUE));
                 Log.i(TAG, "SHA256结果为:" + EncryptionHelper.getSha256Param(ENCRYPT_VALUE));
                 Log.i(TAG, "HmacMD5结果为:" + EncryptionHelper.getHmacMd5Param(ENCRYPT_VALUE, ENCRYPT_KEY));
@@ -36,17 +37,21 @@ public class MainActivity extends AppCompatActivity {
                 String rsa2Result = EncryptionHelper.encryptRsaParamWithPublicKey2ToBase64ToString(ENCRYPT_VALUE, RSA_PUBLIC_KEY);
                 Log.i(TAG, "RSA加密Base64结果为:" + rsa2Result);
                 Log.i(TAG, "RSA解密Base64结果为:" + EncryptionHelper.decryptBase64RsaParamWithPrivateKey2(rsa2Result, RSA_PRIVATE_KEY));
-                byte[] aesBytes=EncryptionHelper.encryptAesParam(ENCRYPT_VALUE.getBytes(),AES_ENCRYPT_KEY.getBytes());
-                byte[] result=EncryptionHelper.decryptAesParam(aesBytes,AES_ENCRYPT_KEY.getBytes());
-                Log.i(TAG,"AES Bytes解密结果为:"+((result==null)?null:new String(result)));
-                byte[] rsaBytes=EncryptionHelper.encryptRsaParamBytes(ENCRYPT_VALUE.getBytes(), Base64Helper.decode(RSA_PUBLIC_KEY.getBytes()));
-                byte[] rsaBytesResult=EncryptionHelper.decryptRsaParamBytes(rsaBytes,Base64Helper.decode(RSA_PRIVATE_KEY.getBytes()));
-                Log.i(TAG,"RSA Bytes解密结果为:"+((rsaBytesResult==null)?null:new String(rsaBytesResult)));
+                byte[] aesBytes = EncryptionHelper.encryptAesParam(ENCRYPT_VALUE.getBytes(), AES_ENCRYPT_KEY.getBytes());
+                byte[] result = EncryptionHelper.decryptAesParam(aesBytes, AES_ENCRYPT_KEY.getBytes());
+                Log.i(TAG, "AES Bytes解密结果为:" + ((result == null) ? null : new String(result)));
+                byte[] rsaBytes = EncryptionHelper.encryptRsaParamBytes(ENCRYPT_VALUE.getBytes(), Base64Helper.decode(RSA_PUBLIC_KEY.getBytes()));
+                byte[] rsaBytesResult = EncryptionHelper.decryptRsaParamBytes(rsaBytes, Base64Helper.decode(RSA_PRIVATE_KEY.getBytes()));
+                Log.i(TAG, "RSA Bytes解密结果为:" + ((rsaBytesResult == null) ? null : new String(rsaBytesResult)));
 
             }
         });
     }
 
+
+    private static final String PBE_PASSWORD = "pbe";
+    private static final String PBE_SALT = "12345678";
+    private static final int PBE_SIZE = 100;
 
     private static final String ENCRYPT_VALUE = "test";
     private static final String ENCRYPT_KEY = "123";

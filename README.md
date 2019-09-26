@@ -98,3 +98,22 @@ cipherAsymmetryType |enum|非对称加密算法的填充格式枚举
 data |String|非对称加密算法的数据
 key |String|非对称加密算法的密码
 true |boolean|是否是公钥
+
+### PBE加密算法实现
+
+###### 代码示例
+
+```java
+PBEHelper.encryptPBE2HexString(hashType, data, key, salt, size);
+
+```
+
+###### 参数设置
+
+数据|数据类型|数据解释
+---|-----|---
+hashType|enum|PBE加密算法枚举
+data |String|PBE加密算法的数据
+key |String|PBE加密算法的密码
+salt |String|PBE加密算法的盐(消息双方规定的信息)
+size |int|循环次数

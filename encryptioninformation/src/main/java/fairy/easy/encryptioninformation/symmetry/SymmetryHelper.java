@@ -52,6 +52,9 @@ public class SymmetryHelper {
      * @return 16进制字符串
      */
     public static String encryptSymmetryToString(SymmetryType hashType, CipherSymmetryType symmetryType, String data, String key, byte[] iv) {
+        if (TextUtils.isEmpty(data) || TextUtils.isEmpty(key)) {
+            return null;
+        }
         return encryptSymmetryToString(hashType, symmetryType, data.getBytes(), key.getBytes(), iv);
     }
 
@@ -94,6 +97,9 @@ public class SymmetryHelper {
      * @return 字节数组
      */
     public static byte[] encryptSymmetry(SymmetryType hashType, CipherSymmetryType symmetryType, String data, String key, byte[] iv) {
+        if (TextUtils.isEmpty(data) || TextUtils.isEmpty(key)) {
+            return null;
+        }
         return symmetricTemplate(data.getBytes(), key.getBytes(), hashType.getTypeName(), symmetryType.getCipher(), iv, true);
     }
 
@@ -124,6 +130,9 @@ public class SymmetryHelper {
      * @return 16进制字符串
      */
     public static String decryptSymmetryToString(SymmetryType hashType, CipherSymmetryType symmetryType, String data, String key, byte[] iv) {
+        if (TextUtils.isEmpty(data) || TextUtils.isEmpty(key)) {
+            return null;
+        }
         return decryptSymmetryToString(hashType, symmetryType, StringUtil.hexString2Bytes(data), key.getBytes(), iv);
     }
 
@@ -170,6 +179,9 @@ public class SymmetryHelper {
      * @return 字节数组
      */
     public static byte[] decryptSymmetry(SymmetryType hashType, CipherSymmetryType symmetryType, String data, String key, byte[] iv) {
+        if (TextUtils.isEmpty(data) || TextUtils.isEmpty(key)) {
+            return null;
+        }
         return symmetricTemplate(StringUtil.hexString2Bytes(data), key.getBytes(), hashType.getTypeName(), symmetryType.getCipher(), iv, false);
     }
 

@@ -160,6 +160,9 @@ public class AsymmetryHelper {
      * @return 字节数组
      */
     public static byte[] decryptHexStringAsymmetry(AsymmetryType hashType, CipherAsymmetryType symmetryType, String data, String key, boolean isPublicKey) {
+        if (TextUtils.isEmpty(data) || TextUtils.isEmpty(key)) {
+            return null;
+        }
         return decryptAsymmetry(hashType, symmetryType, StringUtil.hexString2Bytes(data), Base64Helper.decode(key), isPublicKey);
     }
 
@@ -174,6 +177,9 @@ public class AsymmetryHelper {
      * @return 字节数组
      */
     public static byte[] decryptBase64Asymmetry(AsymmetryType hashType, CipherAsymmetryType symmetryType, String data, String key, boolean isPublicKey) {
+        if (TextUtils.isEmpty(data) || TextUtils.isEmpty(key)) {
+            return null;
+        }
         return decryptAsymmetry(hashType, symmetryType, Base64Helper.decode(data.getBytes()), Base64Helper.decode(key), isPublicKey);
     }
 
