@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+
 import fairy.easy.encryptioninformation.EncryptionHelper;
 import fairy.easy.encryptioninformation.code.Base64Helper;
+import fairy.easy.encryptioninformation.utils.RandomUtil;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private static final String PBE_PASSWORD = "pbe";
-    private static final String PBE_SALT = "12345678";
+    private static final String PBE_SALT = new String(RandomUtil.secureRandom2Bytes());
     private static final int PBE_SIZE = 100;
 
     private static final String ENCRYPT_VALUE = "test";
