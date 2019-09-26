@@ -38,10 +38,10 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG, "RSA解密Base64结果为:" + EncryptionHelper.decryptBase64RsaParamWithPrivateKey2(rsa2Result, RSA_PRIVATE_KEY));
                 byte[] aesBytes=EncryptionHelper.encryptAesParam(ENCRYPT_VALUE.getBytes(),AES_ENCRYPT_KEY.getBytes());
                 byte[] result=EncryptionHelper.decryptAesParam(aesBytes,AES_ENCRYPT_KEY.getBytes());
-                Log.i(TAG,"AES Bytes解密结果为:"+new String(result));
+                Log.i(TAG,"AES Bytes解密结果为:"+((result==null)?null:new String(result)));
                 byte[] rsaBytes=EncryptionHelper.encryptRsaParamBytes(ENCRYPT_VALUE.getBytes(), Base64Helper.decode(RSA_PUBLIC_KEY.getBytes()));
                 byte[] rsaBytesResult=EncryptionHelper.decryptRsaParamBytes(rsaBytes,Base64Helper.decode(RSA_PRIVATE_KEY.getBytes()));
-                Log.i(TAG,"RSA Bytes解密结果为:"+new String(rsaBytesResult));
+                Log.i(TAG,"RSA Bytes解密结果为:"+((rsaBytesResult==null)?null:new String(rsaBytesResult)));
 
             }
         });

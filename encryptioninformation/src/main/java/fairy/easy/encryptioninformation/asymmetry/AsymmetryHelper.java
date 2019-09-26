@@ -142,7 +142,11 @@ public class AsymmetryHelper {
         if (TextUtils.isEmpty(data) || TextUtils.isEmpty(key)) {
             return null;
         }
-        return new String(decryptHexStringAsymmetry(hashType, symmetryType, data, key, isPublicKey));
+        byte[] result = decryptHexStringAsymmetry(hashType, symmetryType, data, key, isPublicKey);
+        if (result == null) {
+            return null;
+        }
+        return new String(result);
     }
 
     /**
