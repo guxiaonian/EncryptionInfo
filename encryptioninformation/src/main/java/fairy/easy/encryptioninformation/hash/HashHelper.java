@@ -66,8 +66,17 @@ public class HashHelper {
         }
         try {
             MessageDigest md = MessageDigest.getInstance(hashType.getTypeName());
-            md.update(data);
-            return md.digest();
+            byte[] bytes = md.digest(data);
+            StringBuilder result = new StringBuilder();
+            for (byte b : bytes) {
+                String temp = Integer.toHexString(b & 0xff);
+                if (temp.length() == 1) {
+                    temp = "0" + temp;
+                }
+                result.append(temp);
+            }
+            return result.toString().getBytes();
+
         } catch (NoSuchAlgorithmException e) {
             Log.e(TAG, e.toString());
             return null;

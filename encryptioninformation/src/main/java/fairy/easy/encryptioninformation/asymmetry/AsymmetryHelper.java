@@ -1,7 +1,6 @@
 package fairy.easy.encryptioninformation.asymmetry;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.security.InvalidKeyException;
 import java.security.Key;
@@ -18,6 +17,7 @@ import javax.crypto.NoSuchPaddingException;
 
 import fairy.easy.encryptioninformation.cipher.CipherAsymmetryType;
 import fairy.easy.encryptioninformation.code.Base64Helper;
+import fairy.easy.encryptioninformation.utils.LogUtils;
 import fairy.easy.encryptioninformation.utils.StringUtil;
 
 /**
@@ -278,17 +278,17 @@ public class AsymmetryHelper {
                 return cipher.doFinal(data);
             }
         } catch (NoSuchAlgorithmException e) {
-            Log.e(TAG, e.toString());
+            LogUtils.e(TAG, e.toString());
         } catch (NoSuchPaddingException e) {
-            Log.e(TAG, e.toString());
+            LogUtils.e(TAG, e.toString());
         } catch (InvalidKeyException e) {
-            Log.e(TAG, e.toString());
+            LogUtils.e(TAG, e.toString());
         } catch (BadPaddingException e) {
-            Log.e(TAG, e.toString());
+            LogUtils.e(TAG, e.toString());
         } catch (IllegalBlockSizeException e) {
-            Log.e(TAG, e.toString());
+            LogUtils.e(TAG, e.toString());
         } catch (InvalidKeySpecException e) {
-            Log.e(TAG, e.toString());
+            LogUtils.e(TAG, e.toString());
         }
         return null;
     }

@@ -1,7 +1,6 @@
 package fairy.easy.encryptioninformation.pbe;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 
 import javax.crypto.Cipher;
@@ -10,6 +9,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 
+import fairy.easy.encryptioninformation.utils.LogUtils;
 import fairy.easy.encryptioninformation.utils.StringUtil;
 
 /**
@@ -178,7 +178,7 @@ public class PBEHelper {
             cipher.init(isEncrypt ? Cipher.ENCRYPT_MODE : Cipher.DECRYPT_MODE, secretKey, params);
             return cipher.doFinal(data);
         } catch (Exception e) {
-            Log.e(TAG, e.toString());
+            LogUtils.e(TAG, e.toString());
             return null;
         }
     }

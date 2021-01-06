@@ -1,7 +1,6 @@
 package fairy.easy.encryptioninformation.symmetry;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.security.spec.AlgorithmParameterSpec;
 
@@ -13,6 +12,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import fairy.easy.encryptioninformation.cipher.CipherSymmetryType;
+import fairy.easy.encryptioninformation.utils.LogUtils;
 import fairy.easy.encryptioninformation.utils.StringUtil;
 
 /**
@@ -224,7 +224,7 @@ public class SymmetryHelper {
             }
             return cipher.doFinal(data);
         } catch (Exception e) {
-            Log.e(TAG, e.toString());
+            LogUtils.e(TAG, e.toString());
             return null;
         }
     }

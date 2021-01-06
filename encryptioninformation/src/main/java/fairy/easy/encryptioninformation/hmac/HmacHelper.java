@@ -1,7 +1,6 @@
 package fairy.easy.encryptioninformation.hmac;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -9,6 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
+import fairy.easy.encryptioninformation.utils.LogUtils;
 import fairy.easy.encryptioninformation.utils.StringUtil;
 
 /**
@@ -77,7 +77,7 @@ public class HmacHelper {
             mac.init(secretKey);
             return mac.doFinal(data);
         } catch (InvalidKeyException | NoSuchAlgorithmException e) {
-            Log.e(TAG, e.toString());
+            LogUtils.e(TAG, e.toString());
             return null;
         }
     }

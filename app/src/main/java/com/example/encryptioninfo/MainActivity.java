@@ -7,9 +7,10 @@ import android.util.Log;
 import android.view.View;
 
 
+import java.security.SecureRandom;
+
 import fairy.easy.encryptioninformation.EncryptionHelper;
 import fairy.easy.encryptioninformation.code.Base64Helper;
-import fairy.easy.encryptioninformation.utils.RandomUtil;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -50,9 +51,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * PBE加密专用盐
+     *
+     * @return 盐
+     */
+    public static byte[] secureRandom2Bytes() {
+        SecureRandom secureRandom = new SecureRandom();
+        return secureRandom.generateSeed(8);
+    }
     private static final String PBE_PASSWORD = "pbe";
-    private static final String PBE_SALT = new String(RandomUtil.secureRandom2Bytes());
+    private static final String PBE_SALT = new String(secureRandom2Bytes());
     private static final int PBE_SIZE = 100;
 
     private static final String ENCRYPT_VALUE = "test";

@@ -21,7 +21,7 @@ import fairy.easy.encryptioninformation.symmetry.SymmetryType;
  */
 public class EncryptionHelper {
 
-    private static final String VERSION = "0.1.0";
+    private static final String VERSION = "0.1.1";
 
     public static String getVersion() {
         return VERSION;
@@ -185,26 +185,26 @@ public class EncryptionHelper {
     /**
      * PBE加密返回值
      *
-     * @param data     加密数据
-     * @param key      密码
-     * @param salt     盐
-     * @param size     循环次数
+     * @param data 加密数据
+     * @param key  密码
+     * @param salt 盐
+     * @param size 循环次数
      * @return 16进制字符串
      */
     public static String encryptPBE2HexString(String data, String key, String salt, int size) {
-        return PBEHelper.encryptPBE2HexString(PBEType.PBE_WITH_MD5_AND_DES,data,key,salt,size);
+        return PBEHelper.encryptPBE2HexString(PBEType.PBE_WITH_MD5_AND_DES, data, key, salt, size);
     }
 
     /**
      * PBE解密返回值
      *
-     * @param data     加密数据
-     * @param key      密码
-     * @param salt     盐
-     * @param size     循环次数
+     * @param data 加密数据
+     * @param key  密码
+     * @param salt 盐
+     * @param size 循环次数
      * @return 16进制字符串
      */
     public static String decryptHexStringPBE2String(String data, String key, String salt, int size) {
-        return PBEHelper.decryptHexStringPBE2String(PBEType.PBE_WITH_MD5_AND_DES,data,key,salt,size);
+        return PBEHelper.decryptHexStringPBE2String(PBEType.PBE_WITH_MD5_AND_DES, data, key, salt, size);
     }
 }
